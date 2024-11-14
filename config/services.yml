@@ -2,3 +2,13 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
+
+  Ubeliakou\OneTimeOperationSdk\Generator\NamespaceResolver\NamespaceResolver:
+    class: Ubeliakou\OneTimeOperationBundle\Generator\SymfonyNamespaceResolver
+
+  Ubeliakou\OneTimeOperationSdk\Generator\Template\OperationTemplateInterface:
+    class: Ubeliakou\OneTimeOperationBundle\Generator\DoctrineOperationTemplate
+
+  Ubeliakou\OneTimeOperationSdk\Inventory\Instantiator\OperationInstantiatorInterface:
+    class: Ubeliakou\OneTimeOperationBundle\Instantiator\DoctrineOperationInstantiator
+    arguments: [ '@doctrine.orm.entity_manager' ]
