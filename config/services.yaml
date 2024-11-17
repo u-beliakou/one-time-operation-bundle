@@ -7,10 +7,15 @@ services:
     autowire: true
     tags: [ 'console.command' ]
 
+  Ubeliakou\OneTimeOperationBundle\Command\ExecuteOperationCommand:
+    autowire: true
+    tags: [ 'console.command' ]
+
   Ubeliakou\OneTimeOperationSdk\Generator\OperationGenerator: ~
   Ubeliakou\OneTimeOperationSdk\Executor\OperationExecutor: ~
   Ubeliakou\OneTimeOperationSdk\Inventory\OperationInventory: ~
   Ubeliakou\OneTimeOperationSdk\Inventory\OperationIncluder: ~
+  Ubeliakou\OneTimeOperationBundle\Executor\ExecutionLocker: ~
 
   Ubeliakou\OneTimeOperationSdk\Generator\NamespaceResolver\NamespaceResolver:
     class: Ubeliakou\OneTimeOperationBundle\Generator\SymfonyNamespaceResolver
@@ -21,6 +26,12 @@ services:
   Ubeliakou\OneTimeOperationSdk\Inventory\Instantiator\OperationInstantiatorInterface:
     class: Ubeliakou\OneTimeOperationBundle\Instantiator\DoctrineOperationInstantiator
     arguments: [ '@doctrine.orm.entity_manager' ]
+
+  Ubeliakou\OneTimeOperationSdk\Registry\RegistryInterface:
+    class: Ubeliakou\OneTimeOperationBundle\Operation\DoctrinePdoRegistry
+    arguments:
+      $tableName: 'one_time_operations'
+      $connection: '@doctrine.dbal.default_connection'
 
   Ubeliakou\OneTimeOperationSdk\FileSystem\DirectoryInterface:
     class: Ubeliakou\OneTimeOperationSdk\FileSystem\DefaultDirectory

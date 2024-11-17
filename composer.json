@@ -12,7 +12,9 @@
     "symfony/dependency-injection": "^6.3 | ^7",
     "doctrine/orm": "^3.2",
     "symfony/console": "^6.3 | ^7",
-    "u-beliakou/one-time-operation-sdk": "^0.1"
+    "u-beliakou/one-time-operation-sdk": "^0.1",
+    "symfony/lock": "^6.3 | ^7",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {
