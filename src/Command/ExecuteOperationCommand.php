@@ -5,7 +5,7 @@ namespace Ubeliakou\OneTimeOperationBundle\Command;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Lock\Exception\LockConflictedException;
-use Ubeliakou\OneTimeOperationSdk\Executor\Dto\ExecutionContext;
+use Ubeliakou\OneTimeOperationBundle\Executor\ExecutionContextProvider;
 use Ubeliakou\OneTimeOperationSdk\Executor\OperationExecutor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,13 +18,18 @@ class ExecuteOperationCommand extends Command
 
     private OperationExecutor $executor;
     private ExecutionLocker $locker;
+    private ExecutionContextProvider $contextProvider;
 
-    public function __construct(OperationExecutor $executor, ExecutionLocker $locker)
-    {
+    public function __construct(
+        OperationExecutor $executor,
+        ExecutionLocker $locker,
+        ExecutionContextProvider $contextProvider
+    ) {
         parent::__construct();
 
         $this->executor = $executor;
         $this->locker = $locker;
+        $this->contextProvider = $contextProvider;
     }
 
     protected function configure(): void
@@ -39,9 +44,9 @@ class ExecuteOperationCommand extends Command
         try {
             $this->locker->acquire();
 
-            $context = new ExecutionContext('dummy-env', 'dummy-project');
-
-            $executedOperations = $this->executor->execute($context);
+            $executedOperations = $this->executor->execute(
+                $this->contextProvider->getContext()
+            );
 
             if ($executedOperations === 0) {
                 $io->info('No operations to execute');

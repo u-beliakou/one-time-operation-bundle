@@ -16,6 +16,7 @@ services:
   Ubeliakou\OneTimeOperationSdk\Inventory\OperationInventory: ~
   Ubeliakou\OneTimeOperationSdk\Inventory\OperationIncluder: ~
   Ubeliakou\OneTimeOperationBundle\Executor\ExecutionLocker: ~
+  Ubeliakou\OneTimeOperationBundle\Executor\ExecutionContextProvider: ~
 
   Ubeliakou\OneTimeOperationSdk\Generator\NamespaceResolver\NamespaceResolver:
     class: Ubeliakou\OneTimeOperationBundle\Generator\SymfonyNamespaceResolver
