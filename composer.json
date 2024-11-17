@@ -1,6 +1,6 @@
 {
   "name": "u-beliakou/one-time-operation-bundle",
-  "description": "One-Time-Operations bundle for Symfony",
+  "description": "One-time operations bundle for Symfony",
   "type": "symfony-bundle",
   "version": "0.1.0",
   "license": "MIT",
