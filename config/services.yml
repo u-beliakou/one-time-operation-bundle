@@ -3,6 +3,15 @@ services:
     autowire: true
     autoconfigure: true
 
+  Ubeliakou\OneTimeOperationBundle\Command\GenerateOperationCommand:
+    autowire: true
+    tags: [ 'console.command' ]
+
+  Ubeliakou\OneTimeOperationSdk\Generator\OperationGenerator: ~
+  Ubeliakou\OneTimeOperationSdk\Executor\OperationExecutor: ~
+  Ubeliakou\OneTimeOperationSdk\Inventory\OperationInventory: ~
+  Ubeliakou\OneTimeOperationSdk\Inventory\OperationIncluder: ~
+
   Ubeliakou\OneTimeOperationSdk\Generator\NamespaceResolver\NamespaceResolver:
     class: Ubeliakou\OneTimeOperationBundle\Generator\SymfonyNamespaceResolver
 
@@ -12,3 +21,7 @@ services:
   Ubeliakou\OneTimeOperationSdk\Inventory\Instantiator\OperationInstantiatorInterface:
     class: Ubeliakou\OneTimeOperationBundle\Instantiator\DoctrineOperationInstantiator
     arguments: [ '@doctrine.orm.entity_manager' ]
+
+  Ubeliakou\OneTimeOperationSdk\FileSystem\DirectoryInterface:
+    class: Ubeliakou\OneTimeOperationSdk\FileSystem\DefaultDirectory
+    arguments: [ '%kernel.project_dir%/src/Operations' ]
