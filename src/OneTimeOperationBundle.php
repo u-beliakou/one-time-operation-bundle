@@ -15,6 +15,6 @@ class OneTimeOperationBundle extends AbstractBundle
      */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import(__DIR__ . '/../config/services.yml');
+        $container->import(__DIR__ . '/../config/services.yaml');
     }
 }
